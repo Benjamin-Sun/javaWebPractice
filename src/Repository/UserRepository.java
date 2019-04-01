@@ -16,5 +16,5 @@ public interface UserRepository {
 
     public int update(User user) throws SQLException;
 
-    public static User selectByNamePassword(String uname, String pwd) throws SQLException;
+    public User selectByNamePassword(String uname, String pwd) throws SQLException;
 }

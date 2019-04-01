@@ -20,7 +20,7 @@ public class UserServlet extends HttpServlet {
     private UserRepository userRepository=new UserRepositoryImp();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +56,7 @@ public class UserServlet extends HttpServlet {
         String username=req.getParameter("username");
         String password=req.getParameter("password");
         //2：查找有没有这个用户
-        User user = UserRepository.selectByNamePassword(username, password);
+        User user = userRepository.selectByNamePassword(username, password);
         HttpSession session=req.getSession();
         if(user == null){//用户是否存在
             resp.sendRedirect("login.jsp");

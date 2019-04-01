@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Conn {
-    private static Properties properties = new Properties();
+    public static Properties properties = new Properties();
 
 //    public static void main(String[] args) {
 //        try {
@@ -21,7 +21,7 @@ public class Conn {
 
     static {
         try {
-            InputStream inputStream = new FileInputStream("/Users/benjamin/IdeaProjects/javaWebPractice/src/SqlUtils/Conn.java");
+            InputStream inputStream = new FileInputStream("/Users/benjamin/IdeaProjects/javaWebPractice/src/SqlUtils/db.properties");
             properties.load(inputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
