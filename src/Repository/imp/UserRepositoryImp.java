@@ -30,6 +30,28 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
+    public User selectByNamePassword(String uname, String pwd) throws SQLException {
+        String sql="select * from t_user where uname=? and upwd=?";
+        List<User> lists= Query.query(sql, new ResultSetObject<User>() {
+            @Override
+            public User getResult(ResultSet resultSet) throws SQLException {
+                User user=new User();
+                user.setUid(resultSet.getInt("uid"));
+                user.setUname(resultSet.getString("uname"));
+                user.setPassword(resultSet.getString("upwd"));
+                user.setTelephone(resultSet.getString("telephone"));
+                user.setAddress(resultSet.getString("address"));
+                user.setUlevel(resultSet.getInt("ulevel"));
+                return user;
+            }
+        }, uname, pwd);
+        if(lists==null){
+            return null;
+        }
+        return lists.get(0);
+    }
+
+    @Override
     public User selectById(Integer id) throws SQLException {
         String sql = "SELECT * FROM t_user WHERE uid = ?";
         List<User> list = Query.query(sql, new ResultSetObject<User>() {
@@ -68,4 +90,6 @@ public class UserRepositoryImp implements UserRepository {
         String sql = "UPDATE t_user SET uname = ?, upwd = ?, telephone = ?, address = ?, ulevel = ? WHERE uid = ?";
         return Query.update(sql, user.getUname(), user.getPassword(), user.getTelephone(), user.getAddress(), user.getUlevel(), user.getUid());
     }
+
+
 }
