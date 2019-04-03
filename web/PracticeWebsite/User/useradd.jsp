@@ -20,7 +20,7 @@
         <caption>添加用户</caption>
         <tr>
             <td>用户名</td>
-            <td><input type="text" name="username"></td>
+            <td><input type="text" name="username" onblur="checkName(this)"><span id="result"></span></td>
         </tr>
         <tr>
             <td>密码</td>
