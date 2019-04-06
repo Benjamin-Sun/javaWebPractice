@@ -21,7 +21,7 @@ public class Conn {
 
     static {
         try {
-            InputStream inputStream = new FileInputStream("/Users/benjamin/IdeaProjects/javaWebPractice/src/SqlUtils/db.properties");
+            InputStream inputStream = new FileInputStream("D:\\Program Files\\eclipse\\workspace\\javaWebPractice\\src\\SqlUtils\\db.properties");
             properties.load(inputStream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

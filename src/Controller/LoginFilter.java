@@ -37,7 +37,7 @@ public class LoginFilter implements Filter {
             HttpSession session=request.getSession();
             HttpServletResponse response=(HttpServletResponse) servletResponse;
             if(session.getAttribute("user")==null){
-                response.sendRedirect("login.jsp");
+                response.sendRedirect("login.html");
             }else{
                 chain.doFilter(servletRequest,servletResponse);
             }

@@ -74,6 +74,29 @@ public class UserRepositoryImp implements UserRepository {
     }
 
     @Override
+    public int selectByName(String name) throws SQLException {
+        String sql = "SELECT * FROM t_user WHERE uname = ?";
+        List<User> list = Query.query(sql, new ResultSetObject<User>() {
+            @Override
+            public User getResult(ResultSet resultSet) throws SQLException {
+                User user = new User();
+                user.setUid(resultSet.getInt("uid"));
+                user.setUname(resultSet.getString("uname"));
+                user.setPassword(resultSet.getString("upwd"));
+                user.setTelephone(resultSet.getString("telephone"));
+                user.setAddress(resultSet.getString("address"));
+                user.setUlevel(resultSet.getInt("ulevel"));
+                return user;
+            }
+        }, name);
+        if (list == null){
+            return 0;
+        }else {
+            return 1;
+        }
+    }
+
+    @Override
     public int deleteById(Integer id) throws SQLException {
         String sql = "DELETE FROM t_user WHERE uid = ?";
         return Query.update(sql, id);

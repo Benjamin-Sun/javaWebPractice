@@ -33,22 +33,22 @@ public class UserServlet extends HttpServlet {
         try {
             if("list".equals(path)){
                 list(request,response);
-            }else if("add".equals(path)){
+            }else if ("add".equals(path)){
                 add(request,response);
-            }else if("delete".equals(path)){
+            }else if ("delete".equals(path)){
                 delete(request,response);
-            }else if("find".equals(path)){
-                find(request,response);
-            }else if("update".equals(path)){
+            }else if ("find".equals(path)){
+                find (request,response);
+            }else if ("update".equals(path)){
                 update(request,response);
-            }else if("login".equals(path)){
+            }else if ("login".equals(path)){
                 login(request,response);
+            }else if ("checkName".equals(path)){
+                checkName(request,response);
             }
         } catch (SQLException e){
             e.printStackTrace();
         }
-
-
     }
 
     public void login(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
@@ -59,18 +59,18 @@ public class UserServlet extends HttpServlet {
         User user = userRepository.selectByNamePassword(username, password);
         HttpSession session=req.getSession();
         if(user == null){//用户是否存在
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("error.html");
         }else{
             if(user.getUlevel()==0) {//是不是管理员
                 session.setAttribute("user",user);
                 resp.sendRedirect("list.user");
 
             }else{
-                resp.sendRedirect("login.jsp");
+                resp.sendRedirect("login.html");
             }
         }
-
     }
+
     /**
      * 收集网页中的数据，进行修改操作
      * @param req
@@ -103,6 +103,7 @@ public class UserServlet extends HttpServlet {
             }
         }
     }
+
     /**
      * 根据id查找一条记录
      * @param req
@@ -122,10 +123,9 @@ public class UserServlet extends HttpServlet {
                 req.setAttribute("user",user);
                 req.getRequestDispatcher("userupdate.jsp").forward(req,resp);
             }
-
         }
-
     }
+
     /**
      * 根据id进行删除
      * @param req
@@ -147,8 +147,8 @@ public class UserServlet extends HttpServlet {
         }else{
             resp.sendRedirect("error.jsp");
         }
-
     }
+
     /**
      * 实现添加
      * @param req
@@ -157,16 +157,14 @@ public class UserServlet extends HttpServlet {
      * @throws IOException
      */
     public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-        /**
-         * 1:提取页面中的所有表单元素的数据
-         */
+
+//      1:提取页面中的所有表单元素的数据
         String username=req.getParameter("username");
         String password=req.getParameter("password");
         String telephone=req.getParameter("telephone");
         String address=req.getParameter("address");
-        /**
-         * 2: 生成对象
-         */
+
+//      2: 生成对象
         User user=new User();
         user.setUname(username);
         user.setPassword(password);
@@ -174,22 +172,16 @@ public class UserServlet extends HttpServlet {
         user.setAddress(address);
         user.setUlevel(1);
 
-        /**
-         * 3:添加功能的实现
-         */
+//        3:添加功能的实现
         int i=userRepository.insert(user);
+//        System.out.println(i);
 
-        /**
-         * 4：跳转
-         */
-        if(i!=-1){
+//        4：跳转
+        if(i == 1){
             resp.sendRedirect("list.user");
-        }else{
-            resp.sendRedirect("useradd.jsp");
         }
-
-
     }
+
     /**
      * 查找全部数据
      * @param req
@@ -201,5 +193,17 @@ public class UserServlet extends HttpServlet {
         List<User> userlist=userRepository.selectAll();
         req.setAttribute("users",userlist);
         req.getRequestDispatcher("userlist.jsp").forward(req,resp);
+    }
+
+    public void checkName(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+        String name = request.getParameter("uname");
+        String jsonString = "";
+        if (userRepository.selectByName(name) == 1){
+            jsonString="{\"flag\":" + false + "}";
+        }else {
+            jsonString="{\"flag\":" + true + "}";
+        }
+        System.out.println(jsonString);
+        response.getWriter().print(jsonString);
     }
 }

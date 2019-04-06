@@ -24,7 +24,7 @@
     <%--<c:if test="${user == null}"></c:if>--%>
 
 </div>
-<a href="useradd.jsp"><input type="button" value="添加"></a>
+<a href="useradd.html"><input type="button" value="添加"></a>
 <table>
     <caption>显示用户信息</caption>
     <tr>

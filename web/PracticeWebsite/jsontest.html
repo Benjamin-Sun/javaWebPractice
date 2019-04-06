@@ -12,10 +12,10 @@
     function fun() {
         $.ajax({
             type:"POST",
-            url:"/jsontest",/*servlet的处理*/
-            data:{"name":"2222"},/*向服务器传入数据：数据格式json*/
-            dataType:"text",/*接收返回的类型*/
-            success:function (result) {/*通过回调函数处理返回的数据*/
+            url:"/jsontest",
+            data:{"name":"2222"},
+            dataType:"text",
+            success:function (result) {
                 console.log(result);
                 /*console.log(result.flag)*/
             },

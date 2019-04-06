@@ -17,4 +17,6 @@ public interface UserRepository {
     public int update(User user) throws SQLException;
 
     public User selectByNamePassword(String uname, String pwd) throws SQLException;
+
+    public int selectByName(String name) throws SQLException;
 }
