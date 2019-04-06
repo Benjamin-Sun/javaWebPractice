@@ -79,5 +79,6 @@ public class Test {
      */
     public static void main(String[] args) {
         System.out.println(new Conn().properties.getProperty("driver"));
+        //https://github.com/jeanieliu/javaeedemo
     }
 }

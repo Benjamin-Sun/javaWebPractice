@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script type="application/javascript" src="/PracticeWebsite/js/jquery-3.3.1.min.js"></script>
+    <script type="application/javascript" src="js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <input type="button" value="pass" onclick="fun()">
@@ -14,10 +14,13 @@
             type:"POST",
             url:"/jsontest",/*servlet的处理*/
             data:{"name":"2222"},/*向服务器传入数据：数据格式json*/
-            dataType:"String",/*接收返回的类型*/
+            dataType:"text",/*接收返回的类型*/
             success:function (result) {/*通过回调函数处理返回的数据*/
                 console.log(result);
                 /*console.log(result.flag)*/
+            },
+            error:function(){
+                console.log("error");
             }
         })
     }
