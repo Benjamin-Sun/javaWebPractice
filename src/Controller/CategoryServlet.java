@@ -15,9 +15,9 @@ import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "CategoryServlet")
+@WebServlet(name = "CategoryServlet", urlPatterns = "*.cate")
 public class CategoryServlet extends HttpServlet {
-    CategoryRepository categoryRepository = new CategoryRepositoryImp();
+    private CategoryRepository categoryRepository = new CategoryRepositoryImp();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
