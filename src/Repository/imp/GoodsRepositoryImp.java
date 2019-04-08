@@ -36,16 +36,19 @@ public class GoodsRepositoryImp implements GoodsRepository {
 
     @Override
     public int deleteById(Integer id) throws SQLException {
-        return 0;
+        String sql = "DELETE FROM t_good WHERE gid = ?";
+        return Query.update(sql, id);
     }
 
     @Override
-    public int insert(Category category) throws SQLException {
-        return 0;
+    public int insert(Goods goods) throws SQLException {
+        String sql = "INSERT INTO t_good (gnum, gname, gprice, gstock, gsell) VALUES(?, ?, ?, ?, ?)";
+        return Query.update(sql, goods.getGnum(), goods.getGname(), goods.getGprice(), goods.getGstock(), goods.getGsell());
     }
 
     @Override
-    public int update(Category category) throws SQLException {
-        return 0;
+    public int update(Goods goods) throws SQLException {
+        String sql = "UPDATE t_good SET gname = ?, gnum = ?, gprice = ?, gstock = ?, gsell = ? WHERE gid = ?";
+        return Query.update(sql, goods.getGname(), goods.getGnum(), goods.getGprice(), goods.getGstock(), goods.getGsell(), goods.getGid());
     }
 }

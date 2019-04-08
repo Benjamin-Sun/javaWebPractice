@@ -13,7 +13,7 @@ public interface GoodsRepository {
 
     public int deleteById(Integer id) throws SQLException;
 
-    public int insert(Category category) throws SQLException;
+    public int insert(Goods goods) throws SQLException;
 
-    public int update(Category category) throws SQLException;
+    public int update(Goods goods) throws SQLException;
 }
